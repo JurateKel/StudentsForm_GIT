@@ -395,3 +395,4 @@ document.querySelector(`input[id=${element}]`).checked = true;
 // })
 // 2. Šį masyvą pridėti į localStorage.
 // 3. Puslapio perkrovimo metu iš localStorage esančio masyvo sukurti studentų sąrašą (pradinių studentų sukūrimo funkcionalumas).
+
