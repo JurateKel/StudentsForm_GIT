@@ -1,0 +1,79 @@
+body {
+    margin: 20px;
+}
+.input-div {
+    display:flex; 
+    width:45%; 
+    justify-content:space-between;
+}
+
+.input-style {   
+    display:flex; 
+    width: 500px; 
+    justify-content:space-between;
+}
+.input-style>input {
+    width: 200px;
+}
+
+#student-it-knowledge {
+    width: 188px;
+}
+fieldset {
+    width: 500px;
+    box-sizing: border-box;
+}
+.button {
+    margin-top: 10px;
+}
+.student-item {
+    margin: 10px 0 10px 0;
+    padding: 10px;
+    border: 1px solid gray;
+    width: 500px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    box-shadow: 3px 3px 7px rgb(198, 198, 198);
+}
+.student-item p {
+    display: flex;
+    margin: 0;
+}
+.student-item h4 {
+    display: flex;
+    width: 200px;
+    margin: 0;
+}
+.student-item ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.student-item div{
+    display: flex;
+    width: 400px;
+}
+.group {
+    width: 154px;
+}
+.student-output-data{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+}
+.input-error-message {
+    color: red;
+    height: 20px;
+    position: absolute;
+    left: 520px;
+}
+.input-error {
+    border: 2px solid red;
+}
+.hidden {
+    display: none
+}
+form#search {
+    margin-top: 10px;
+}

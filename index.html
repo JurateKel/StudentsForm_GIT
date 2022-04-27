@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forms</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h3>Užpildykite privalomus laukus</h3>
+  <form id="student-form">
+
+    <div class="input-style">
+      <label for="student-name">Vardas: *<span class="alert" style="color:red;"></span></label>
+      <input type="text" name="name" id="student-name" placeholder="Įveskite vardą..." class="required">
+    </div>
+
+    <div class="input-style">
+      <label for="student-surname">Pavardė: *<span class="alert" style="color:red;"></span></label>
+      <input type="text" name="surname" id="student-surname" placeholder="Įveskite pavardę..." class="required">
+    </div>
+
+    <div class="input-style">
+      <label for="student-age">Amžius: *<span class="alert" style="color:red;"></span></label>
+      <input type="number" name="age" id="student-age" placeholder="Įveskite amžių..." class="required">
+    </div>
+
+    <div class="input-style">
+      <label for="student-phone">Telefono numeris: *</label>
+      <input type="tel" name="phone" id="student-phone" placeholder="Įveskite telefono numerį..." class="required">
+    </div>
+
+    <div class="input-style">
+      <label for="student-email">El. paštas: *<span class="alert" style="color:red;"></span></label>
+      <input type="text" name="email" id="student-email" placeholder="Įveskite el.pašto adresą..." class="required">
+    </div>
+
+    <div class="input-style">
+      <label for="student-it-knowledge">Turimų IT žinių lygis:</label>
+      <div>
+        <input type="range" name="it-knowledge" id="student-it-knowledge" min="1" max="10" value="5" step="1">
+        <output name="output" id="it-knowledge-output"></output>
+      </div>
+    </div>
+
+    <div class="input-style">
+      <legend>Jūsų grupė:</legend>
+      <div class="group">
+        <div>
+          <input type="radio" name="group" id="student-group-1" value="TYPE 1" checked>
+          <label for="student-group-1">TYPE 1gr.</label>
+        </div>
+        <div>
+          <input type="radio" name="group" id="student-group-2" value="TYPE 2">
+          <label for="student-group-2">TYPE 2gr.</label>
+        </div>
+        <div>
+          <input type="radio" name="group" id="student-group-3" value="TYPE 3">
+          <label for="student-group-3">TYPE 3gr.</label><br>
+        </div>
+        <div>
+          <input type="radio" name="group" id="student-group-4" value="TYPE 4">
+          <label for="student-group-4">TYPE 4gr.</label><br>
+        </div>
+        <div>
+          <input type="radio" name="group" id="student-group-5" value="TYPE 5">
+          <label for="student-group-5">TYPE 5gr.</label><br>
+        </div>
+        <div>
+          <input type="radio" name="group" id="student-group-6" value="TYPE 6">
+          <label for="student-group-6">TYPE 6gr.</label><br>
+        </div>
+      </div>
+    </div>
+
+    <fieldset>
+      <legend>Jus dominanti programavimo kalba:</legend>
+      <div>
+        <input type="checkbox" name="interest" id="interestCheck1" value="JavaScript">
+        <label for="interestCheck1">JavaScript</label>
+      </div>
+      <div>
+        <input type="checkbox" name="interest" id="interestCheck2" value="C++">
+        <label for="interestCheck2">C++</label>
+      </div>
+      <div>
+        <input type="checkbox" name="interest" id="interestCheck3" value="PHP">
+        <label for="interestCheck3">PHP</label>
+      </div>
+      <div>
+        <input type="checkbox" name="interest" id="interestCheck4" value="Python">
+        <label for="interestCheck4">Python</label>
+      </div>
+      <div>
+        <input type="checkbox" name="interest" id="interestCheck5" value="C">
+        <label for="interestCheck5">C</label>
+      </div>
+      <div>
+        <input type="checkbox" name="interest" id="interestCheck6" value="Swift">
+        <label for="interestCheck6">Swift</label>
+      </div>
+    </fieldset>
+
+    <input type="submit" class="button" >
+
+  </form>
+  <form id="search">
+    <input type="text" name="" id="" placeholder="Ieskoti...">
+    <input type="submit" value="Ieskoti">
+    <select name="search-option" id="search-option">
+      <option value="name">Vardas</option>
+      <option value="surname">Surname</option>
+      <option value="age">Amzius</option>
+      <option value="group">Grupe</option>
+      <option value="it-knowledge">IT zinios</option>
+      <option value="interests">Pomegiai</option>
+
+    </select>
+  </form>
+  <h3>Studentu sarasas</h3>
+  <span id="alert"></span>
+  <div id="students-list"></div>
+
+
+  <script src="main.js"></script>
+</body>
+</html>
