@@ -35,22 +35,17 @@ form {
     margin-top: 10px;
 }
 .student-item {
-    margin: 10px 0 10px 0;
-    padding: 10px;
-    border: 1px solid gray;
-    width: 500px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    box-shadow: 3px 3px 7px rgb(198, 198, 198);
+    margin: -5px;
 }
 .student-item p {
     display: flex;
     margin: 0;
 }
-.student-item h4 {
+.student-item h6 {
     display: flex;
     width: 200px;
     margin: 0;
+    padding: 0;
 }
 .student-item ul {
     padding: 0;
@@ -76,12 +71,13 @@ form {
     position: absolute;
     left: 520px;
 }
-.input-error {
-    border: 2px solid red;
-}
+
 .hidden {
     display: none
 }
 form#search {
     margin-top: 10px;
+}
+.invalid-feedback {
+    display: block
 }

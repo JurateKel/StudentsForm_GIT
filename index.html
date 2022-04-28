@@ -10,32 +10,32 @@
 </head>
 <body>
 
-  <h3 class="mb-3">Užpildykite privalomus laukus</h3>
-  <form id="student-form">
-    <div class="form-row mb-3">
+  <h4 class="mb-3">Užpildykite privalomus laukus</h4>
+  <form id="student-form" class="needs-validation">
+    <div class="row mb-3">
       <div class="col-6">
         <label for="student-name">Vardas: *<span class="alert" style="color:red;"></span></label>
-        <input type="text" name="name" class="form-control" id="student-name" placeholder="Įveskite vardą..." class="required">
+        <input type="text" name="name" class="form-control required" id="student-name" placeholder="Įveskite vardą...">
       </div>
       <div class="col-6">
         <label for="student-surname">Pavardė: *<span class="alert" style="color:red;"></span></label>
-        <input type="text" name="surname" class="form-control" id="student-surname" placeholder="Įveskite pavardę..." class="required">
+        <input type="text" name="surname" class="form-control required" id="student-surname" placeholder="Įveskite pavardę...">
       </div>
     </div>
 
     <div class="row mb-3 col-3">
       <label for="student-age">Amžius: *<span class="alert" style="color:red;"></span></label>
-      <input type="number" name="age" class="form-control" id="student-age" placeholder="Įveskite amžių..." class="required">
+      <input type="number" name="age" class="form-control required" id="student-age" placeholder="Įveskite amžių...">
     </div>
 
-    <div class="form-row mb-3">
+    <div class="row mb-3">
       <div class="form-group col-6">
         <label for="student-phone">Telefono numeris: *</label>
-        <input type="tel" name="phone" class="form-control" id="student-phone" placeholder="Įveskite telefono numerį..." class="required">
+        <input type="tel" name="phone" class="form-control required" id="student-phone" placeholder="Įveskite telefono numerį...">
       </div>
       <div class="form-group col-6">
         <label for="student-email">El. paštas: *<span class="alert" style="color:red;"></span></label>
-        <input type="text" name="email" class="form-control" id="student-email" placeholder="Įveskite el.pašto adresą..." class="required">
+        <input type="text" name="email" class="form-control required" id="student-email" placeholder="Įveskite el.pašto adresą...">
       </div>
     </div>
 
@@ -109,24 +109,23 @@
       </div>
     </fieldset>
 
-    <input type="submit" class="btn btn-secondary form-row mt-1" >
-
+    <input type="submit" class="btn btn-secondary btn-sm form-row mt-1" >
+  <h4 class="mt-3 mb-3">Studentų sąrašas</h4>
   </form>
-  <form id="search" class="form-row">
+  <form id="search" class="form-row mb-3">
     <input type="text" class="form-control col-3" name="" id="" placeholder="Ieskoti...">
-    <input type="submit" class="btn btn-secondary form-control col-1" value="Ieskoti">
-    <select name="search-option" class="form-select form-control col-3" id="search-option">
-      <option selected>Pasirinkite paieškos kriterijų</option>
+    <select name="search-option" class="form-select form-control col-2" id="search-option">
+      <option selected>Ieškoti kategorijoje</option>
       <option value="name">Vardas</option>
       <option value="surname">Surname</option>
       <option value="age">Amzius</option>
       <option value="group">Grupe</option>
       <option value="it-knowledge">IT zinios</option>
       <option value="interests">Pomegiai</option>
-
     </select>
+    <input type="submit" class="btn btn-secondary btn-sm form-control col-1" value="Ieskoti">
   </form>
-  <h3>Studentu sarasas</h3>
+
   <span id="alert"></span>
   <div id="students-list"></div>
 
