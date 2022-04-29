@@ -88,7 +88,7 @@ function renderStudent(studentData) {
     let interests = studentData.interests;
     let studentsList = document.querySelector('#students-list');
     let studentItem = document.createElement('div');
-    studentItem.classList.add('student-item', `form-control`, `col-4`, `mb-3`);
+    studentItem.classList.add('student-item', `form-control`, `mw-50`, `mb-3`);
 
     let studentIDEl = document.createElement('p');
     studentIDEl.innerHTML = `<h6>ID: </h6><span class="student-id">${personID}</span>`;
