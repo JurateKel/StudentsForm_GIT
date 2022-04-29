@@ -31,6 +31,9 @@ body {
 form {
     max-width: 800px;
 }
+input[type=range] {
+    padding: 0;
+}
 .button {
     margin-top: 10px;
 }
