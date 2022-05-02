@@ -38,7 +38,7 @@ input[type=range] {
     margin-top: 10px;
 }
 #students-list {
-    max-width: 50%;
+    max-width: 500px;
 }
 .student-item {
     margin: -5px;

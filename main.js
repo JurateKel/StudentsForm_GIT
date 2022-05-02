@@ -1,8 +1,90 @@
+const STUDENT_DATA_GROUP = [
+    {
+        id: Math.floor(Math.random() * 10000),
+      name: 'Tomas',
+      surname: 'Tomauskas',
+      age: 20,
+      phone: '+37061111111',
+      email: 'tomas@email.lt',
+      itKnowledge: 5,
+      group: `TYPE 2`,
+      interests: [
+        'TypeScript',
+        'Node',
+        'React Native'
+      ]
+    },
+    {
+        id: Math.floor(Math.random() * 10000),
+      name: 'Tadas',
+      surname: 'Tadauskas',
+      age: 35,
+      phone: '+3762222222',
+      email: 'tadas@email.lt',
+      itKnowledge: 5,
+      group: `TYPE 2`,
+      interests: [
+        'JavaScript',
+        'TypeScript',
+        'Node',
+        'React Native'
+      ]
+    },
+    {  
+        id: Math.floor(Math.random() * 10000),
+      name: 'Edita',
+      surname: 'Ediauskienė',
+      age: 32,
+      phone: '+37063333333',
+      email: 'vardas3@imone.lt',
+      itKnowledge: 5,
+      group: `TYPE 3`,
+      interests: [
+        'JavaScript',
+        'TypeScript',
+        'Node',
+      ]
+    },
+    {
+        id: Math.floor(Math.random() * 10000),
+      name: 'Jonas',
+      surname: 'Jonauskas',
+      age: 25,
+      phone: '+37064444444',
+      email: 'jonas@email.lt',
+      itKnowledge: 5,
+      group: `TYPE 1`,
+      interests: [
+        'JavaScript',
+        'TypeScript',
+        'React Native',
+      ]
+    },
+    {
+        id: Math.floor(Math.random() * 10000),
+      name: 'Dana',
+      surname: 'Danauskaitė',
+      age: 18,
+      phone: '+37065555555',
+      email: 'dana@email.lt',
+      itKnowledge: 5,
+      group: `TYPE 3`,
+      interests: [
+        'JavaScript',
+        'TypeScript',
+        'Node',
+        'React Native',
+        `C++`
+      ]
+    },
+  ];
 
 let studentsLocalStorage = JSON.parse(localStorage.getItem(`initialStudentsData`));
-let INITIAL_STUDENT_DATA = studentsLocalStorage ? studentsLocalStorage : [];
+let INITIAL_STUDENT_DATA = studentsLocalStorage ? studentsLocalStorage : localStorage.setItem(`initialStudentsData`, JSON.stringify(STUDENT_DATA_GROUP));
 let studentForm = document.querySelector('#student-form');
 let editStudent = null;
+console.log(localStorage)
+console.log(localStorage.getItem(`initialStudentsData`).value)
 
 studentForm.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -15,6 +97,7 @@ studentForm.addEventListener('submit', (event) => {
         return element.value;
     });
     let studentFormData = {
+        id: Math.floor(Math.random() * 10000),
         name: document.querySelector('input[name=name]').value,
         surname: document.querySelector('#student-surname').value,
         age: event.target.elements.age.value,
@@ -30,9 +113,12 @@ studentForm.addEventListener('submit', (event) => {
         alertMessage(`Student created (${studentFormData.name} ${studentFormData.surname})`);
     }
     renderStudent(studentFormData);
-
+    console.dir([...INITIAL_STUDENT_DATA])
     let studentsDataArray = [studentFormData, ...INITIAL_STUDENT_DATA];
+    console.log(studentsDataArray)
     localStorage.setItem(`initialStudentsData`, JSON.stringify(studentsDataArray));
+    console.log(studentsDataArray)
+    INITIAL_STUDENT_DATA = JSON.parse(localStorage.getItem(`initialStudentsData`))
 
     studentForm.reset();
     itKnowledgeOutputReset();
@@ -77,7 +163,6 @@ function renderInitialStudentData(students) {
 
 
 function renderStudent(studentData) {
-    let personID = Math.floor(Math.random() * 10000);
     let personName = studentData.name;
     let personSurname = studentData.surname;
     let personAge = studentData.age;
@@ -90,8 +175,7 @@ function renderStudent(studentData) {
     let studentItem = document.createElement('div');
     studentItem.classList.add('student-item', `form-control`, `mw-50`, `mb-3`);
 
-    let studentIDEl = document.createElement('p');
-    studentIDEl.innerHTML = `<h6>ID: </h6><span class="student-id">${personID}</span>`;
+
     let studentNameEl = document.createElement('p');
     studentNameEl.innerHTML = `<h6>Name: </h6><span class="student-name">${personName}</span>`;
     let studentSurnameEl = document.createElement('p');
@@ -137,6 +221,7 @@ function renderStudent(studentData) {
         }
         privateInfoButton.classList.toggle('hide');
     });
+
     let deleteStudentButton = document.createElement('button');
     deleteStudentButton.classList.add(`btn`, `btn-outline-secondary`, `mt-1`, `btn-sm`, `mr-1`)
     deleteStudentButton.textContent = 'Ištrinti studentą';
@@ -171,7 +256,7 @@ function renderStudent(studentData) {
     })
 
 
-    studentItem.append(studentIDEl, studentNameEl, studentSurnameEl, studentAgeEl, studentPhoneEl, studentEmailEl, studentItKnowledgeEl, studentGroupEl, interestWrapperEl, privateInfoButton, deleteStudentButton, editStudentButton);
+    studentItem.append(studentNameEl, studentSurnameEl, studentAgeEl, studentPhoneEl, studentEmailEl, studentItKnowledgeEl, studentGroupEl, interestWrapperEl, privateInfoButton, deleteStudentButton, editStudentButton);
 
 
     if (editStudent) {
@@ -194,7 +279,6 @@ function formErrorHandler(form) {
     let formValid = true;
     requiredInputs.forEach(input => {
         if (!input.value) {
-            console.log(input.value)
         formValid = false;
         inputErrorMessage(input, 'Šis laukelis yra privalomas');
         } else {
@@ -249,7 +333,7 @@ function inputErrorMessage(inputElement, errorMessage) {
 }
 
 
-renderInitialStudentData(INITIAL_STUDENT_DATA);
+renderInitialStudentData(JSON.parse(localStorage.getItem(`initialStudentsData`)));
 itKnowledgeOutputReset();
   
 let searchForm = document.querySelector(`#search`);
@@ -290,18 +374,4 @@ searchForm.addEventListener(`submit`, event => {
         }
     })
 })
-studentForm.addEventListener(`change`, () => {
-    let studentFormData = {
-        name: document.querySelector('#student-name').value,
-        surname: document.querySelector('#student-surname').value,
-        age: document.querySelector(`#student-age`).value,
-        phone: studentForm.querySelector('#student-phone').value,
-        email: document.querySelector('#student-email').value,
-        itKnowledge: document.querySelector('#student-it-knowledge').value,
-        group: studentForm.elements.group.value,
-        interests: [...document.querySelectorAll('input[name=interest]:checked')].map(element=>{return element.id}),
-    }
-    let studentFormLS = JSON.stringify(studentFormData);
-    localStorage.setItem(`student`, studentFormLS)
-});
 
