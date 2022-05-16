@@ -78,14 +78,16 @@ const STUDENT_DATA_GROUP = [
       ]
     },
   ];
-
+// Duomenu paemimas is local storage
 let studentsLocalStorage = JSON.parse(localStorage.getItem(`initialStudentsData`));
+// Pirminio saraso kintamasis
 let INITIAL_STUDENT_DATA = studentsLocalStorage ? studentsLocalStorage : localStorage.setItem(`initialStudentsData`, JSON.stringify(STUDENT_DATA_GROUP));
-let studentForm = document.querySelector('#student-form');
-let editStudent = null;
-console.log(localStorage)
-console.log(localStorage.getItem(`initialStudentsData`).value)
 
+let studentForm = document.querySelector('#student-form');
+// Kintamasis redaguojamo studento nustatytmui
+
+// Studento kurimas
+let editStudent = null;
 studentForm.addEventListener('submit', (event) => {
     event.preventDefault();
     let validForm = formErrorHandler(studentForm);
@@ -109,15 +111,18 @@ studentForm.addEventListener('submit', (event) => {
     };
     if (editStudent) {
         alertMessage(`Student edited (${studentFormData.name} ${studentFormData.surname})`);
+        let studentItemIdLS = document.querySelector(`.edit`).attributes.getNamedItem(`data-user-id`).value;
+        studentFormData.id = parseInt(studentItemIdLS);
+        let itemsInLocalSorage = JSON.parse(localStorage.getItem(`initialStudentsData`));
+        let filtered = itemsInLocalSorage.filter(item => item.id !== Number(studentItemIdLS));
+        filtered.push(studentFormData)
+        localStorage.setItem(`initialStudentsData`, JSON.stringify(filtered))
     } else {
-        alertMessage(`Student created (${studentFormData.name} ${studentFormData.surname})`);
+        alertMessage(`Sukurtas naujas studentas: (${studentFormData.name} ${studentFormData.surname})`);
     }
     renderStudent(studentFormData);
-    console.dir([...INITIAL_STUDENT_DATA])
     let studentsDataArray = [studentFormData, ...INITIAL_STUDENT_DATA];
-    console.log(studentsDataArray)
     localStorage.setItem(`initialStudentsData`, JSON.stringify(studentsDataArray));
-    console.log(studentsDataArray)
     INITIAL_STUDENT_DATA = JSON.parse(localStorage.getItem(`initialStudentsData`))
 
     studentForm.reset();
@@ -163,6 +168,7 @@ function renderInitialStudentData(students) {
 
 
 function renderStudent(studentData) {
+    let personID = studentData.id;
     let personName = studentData.name;
     let personSurname = studentData.surname;
     let personAge = studentData.age;
@@ -174,30 +180,27 @@ function renderStudent(studentData) {
     let studentsList = document.querySelector('#students-list');
     let studentItem = document.createElement('div');
     studentItem.classList.add('student-item', `form-control`, `mw-50`, `mb-3`);
+    studentItem.dataset.userId = personID;
 
-
+    let studentIdEl = document.createElement(`p`);
+    studentIdEl.innerHTML = `<h6>ID: </h6><span class="student-id">${personID}</span>`;
     let studentNameEl = document.createElement('p');
-    studentNameEl.innerHTML = `<h6>Name: </h6><span class="student-name">${personName}</span>`;
+    studentNameEl.innerHTML = `<h6>Vardas: </h6><span class="student-name">${personName}</span>`;
     let studentSurnameEl = document.createElement('p');
-    studentSurnameEl.innerHTML = `<h6>Surname: </h6><span class="student-surname">${personSurname}</span>`;
-
+    studentSurnameEl.innerHTML = `<h6>Pavardė: </h6><span class="student-surname">${personSurname}</span>`;
     let studentAgeEl = document.createElement('p');
-    studentAgeEl.innerHTML = `<h6>Age: </h6><span class="student-age">${personAge}</span>`;
-
+    studentAgeEl.innerHTML = `<h6>Amžius: </h6><span class="student-age">${personAge}</span>`;
     let studentPhoneEl = document.createElement('p');
-    studentPhoneEl.innerHTML = `<h6>Phone: </h6><span class="hidden-area">****</span>`;
-
+    studentPhoneEl.innerHTML = `<h6>Telefono numeris: </h6><span class="hidden-area">****</span>`;
     let studentEmailEl = document.createElement('p');
-    studentEmailEl.innerHTML = `<h6>Email: </h6><span class="hidden-area">****</span>`;
-
+    studentEmailEl.innerHTML = `<h6>El. pašto adresas: </h6><span class="hidden-area">****</span>`;
     let studentItKnowledgeEl = document.createElement('p');
-    studentItKnowledgeEl.innerHTML = `<h6>IT Knowledge: </h6><span class="student-it-knowledge">${personItKnowledge}</span>`;
-
+    studentItKnowledgeEl.innerHTML = `<h6>IT žinios: </h6><span class="student-it-knowledge">${personItKnowledge}</span>`;
     let studentGroupEl = document.createElement('p');
-    studentGroupEl.innerHTML = `<h6>Group: </h6><span class="student-group">${personGroup}</span>`;
+    studentGroupEl.innerHTML = `<h6>Grupė: </h6><span class="student-group">${personGroup}</span>`;
     let interestWrapperEl = document.createElement('div');
     let interestTitleEl = document.createElement('h6');
-    interestTitleEl.textContent = 'Interests:';
+    interestTitleEl.textContent = 'Dominančios kalbos:';
     let studentInterestsEl = document.createElement('ul');
     studentInterestsEl.classList.add(`interests-list`)
     interests.forEach((interest) => {
@@ -206,9 +209,11 @@ function renderStudent(studentData) {
         studentInterestsEl.append(interestItem);
     });
     interestWrapperEl.append(interestTitleEl, studentInterestsEl);
+
     let privateInfoButton = document.createElement('button');
     privateInfoButton.classList.add(`btn`, `btn-outline-secondary`, `btn-sm`, `mt-1`, `mr-1`, `col-6`)
     privateInfoButton.textContent = 'Rodyti asmens duomenis';
+
     privateInfoButton.addEventListener('click', () => {
         if (privateInfoButton.classList.contains('hide')) {
         studentPhoneEl.querySelector('.hidden-area').textContent = '****';
@@ -225,8 +230,14 @@ function renderStudent(studentData) {
     let deleteStudentButton = document.createElement('button');
     deleteStudentButton.classList.add(`btn`, `btn-outline-secondary`, `mt-1`, `btn-sm`, `mr-1`)
     deleteStudentButton.textContent = 'Ištrinti studentą';
+
     deleteStudentButton.addEventListener('click', () => {
         studentItem.remove();
+        let studentItemIdLS = studentItem.querySelector(`.student-id`).textContent;
+        let studentItemInLS = JSON.parse(localStorage.getItem(`initialStudentsData`));
+        let filtered = studentItemInLS.filter(item => item.id !== Number(studentItemIdLS))
+        localStorage.setItem(`initialStudentsData`, JSON.stringify(filtered))
+
         alertMessage(`Studentas (${personName} ${personSurname}) sėkmingai ištrintas.`);
     });
 
@@ -234,7 +245,7 @@ function renderStudent(studentData) {
     editStudentButton.classList.add(`btn`, `btn-outline-secondary`, `btn-sm`, `mt-1`, `col-6`)
     editStudentButton.textContent = `Redaguoti studento duomenis`;
 
-    editStudentButton.addEventListener(`click`, () => {
+    editStudentButton.addEventListener(`click`, (element) => {
         studentForm.querySelector(`#student-name`).value = personName;
         studentForm.querySelector(`#student-surname`).value = personSurname;
         studentForm.querySelector(`#student-age`).value = personAge;
@@ -243,26 +254,25 @@ function renderStudent(studentData) {
         studentForm.elements.group.value = personGroup;
         studentForm.querySelector(`#student-it-knowledge`).value = personItKnowledge;
         interests.map(singleInterest => {
-            console.log(singleInterest)
-            console.log(studentForm.elements.interest)
             studentForm.elements.interest.forEach(formInterest => {
             if (singleInterest === formInterest.value) {
                 formInterest.checked = true;
-            }
+                }
             })
         })
-        studentForm.querySelector(`[type=submit]`).value = `Save changes`;
-        editStudent = studentItem;
+
+        studentForm.querySelector(`[type=submit]`).value = `Išsaugoti pakeitimus`
+        element.target.parentElement.classList.add(`edit`)
+        editStudent = element.target.parentElement;
     })
 
-
-    studentItem.append(studentNameEl, studentSurnameEl, studentAgeEl, studentPhoneEl, studentEmailEl, studentItKnowledgeEl, studentGroupEl, interestWrapperEl, privateInfoButton, deleteStudentButton, editStudentButton);
+    studentItem.append(studentIdEl, studentNameEl, studentSurnameEl, studentAgeEl, studentPhoneEl, studentEmailEl, studentItKnowledgeEl, studentGroupEl, interestWrapperEl, privateInfoButton, deleteStudentButton, editStudentButton);
 
 
     if (editStudent) {
         editStudent.replaceWith(studentItem);
         editStudent = null;
-        studentForm.querySelector(`[type=submit]`).value = `Submit`;
+        studentForm.querySelector(`[type=submit]`).value = `Pateikti`;
     } else {
         studentsList.prepend(studentItem);
     }
@@ -363,7 +373,6 @@ searchForm.addEventListener(`submit`, event => {
         } else if (searchForm.querySelector(`#search-option`).value===`interests`) {
         studentInterests.forEach(e=>{
             if (e.textContent.toLowerCase().includes(searchInput.toLowerCase())) {
-            console.log(element)
                 element.style.display = `block`;
             } else {
             element.style.display = `none`;
