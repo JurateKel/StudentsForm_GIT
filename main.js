@@ -110,7 +110,7 @@ studentForm.addEventListener('submit', (event) => {
         interests: interestValues,
     };
     if (editStudent) {
-        alertMessage(`Student edited (${studentFormData.name} ${studentFormData.surname})`);
+        alertMessage(`Studento (${studentFormData.name} ${studentFormData.surname}) duomenys pakoreguoti`);
         let studentItemIdLS = document.querySelector(`.edit`).attributes.getNamedItem(`data-user-id`).value;
         studentFormData.id = parseInt(studentItemIdLS);
         let itemsInLocalSorage = JSON.parse(localStorage.getItem(`initialStudentsData`));
@@ -212,7 +212,7 @@ function renderStudent(studentData) {
 
     let privateInfoButton = document.createElement('button');
     privateInfoButton.classList.add(`btn`, `btn-outline-secondary`, `btn-sm`, `mt-1`, `mr-1`, `col-6`)
-    privateInfoButton.textContent = 'Rodyti asmens duomenis';
+    privateInfoButton.textContent = 'Rodyti duomenis';
 
     privateInfoButton.addEventListener('click', () => {
         if (privateInfoButton.classList.contains('hide')) {
@@ -243,7 +243,7 @@ function renderStudent(studentData) {
 
     let editStudentButton = document.createElement(`button`);
     editStudentButton.classList.add(`btn`, `btn-outline-secondary`, `btn-sm`, `mt-1`, `col-6`)
-    editStudentButton.textContent = `Redaguoti studento duomenis`;
+    editStudentButton.textContent = `Redaguoti duomenis`;
 
     editStudentButton.addEventListener(`click`, (element) => {
         studentForm.querySelector(`#student-name`).value = personName;
